@@ -27,3 +27,16 @@ Composable measurement-quality checks (see
    :undoc-members:
    :show-inheritance:
 ```
+
+## Uncertainty
+
+Distributions, covariance, linear and Monte Carlo propagation, budgets, and
+coverage intervals (see
+[docs/uncertainty.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/uncertainty.md)).
+
+```{eval-rst}
+.. automodule:: rfmeasurement.uncertainty
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```

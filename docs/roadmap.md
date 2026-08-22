@@ -58,13 +58,13 @@ QA report.
 
 **Goal:** produce defensible uncertainty estimates.
 
--   [ ] uncertainty distributions;
--   [ ] uncertainty sources;
--   [ ] covariance;
--   [ ] linear propagation;
--   [ ] Monte Carlo;
--   [ ] uncertainty budgets;
--   [ ] coverage intervals.
+-   [x] uncertainty distributions;
+-   [x] uncertainty sources;
+-   [x] covariance;
+-   [x] linear propagation;
+-   [x] Monte Carlo;
+-   [x] uncertainty budgets;
+-   [x] coverage intervals.
 
 **Exit criterion:** results agree with analytical reference cases and
 published metrology examples.
