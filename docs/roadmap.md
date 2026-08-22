@@ -26,13 +26,13 @@ decisions and runnable development environment.
 
 **Goal:** define the stable concepts.
 
--   [ ] `Measurement`
--   [ ] `MeasurementContext`
--   [ ] `Measurand`
--   [ ] `ProvenanceRecord`
--   [ ] `AnalysisResult`
--   [ ] validation result model
--   [ ] uncertainty source model
+-   [x] `Measurement`
+-   [x] `MeasurementContext`
+-   [x] `Measurand`
+-   [x] `ProvenanceRecord`
+-   [x] `AnalysisResult`
+-   [x] validation result model
+-   [x] uncertainty source model
 
 **Exit criterion:** domain objects can represent a realistic VNA
 measurement without instrument-specific assumptions.
