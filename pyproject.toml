@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "rfmeasurement"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "An open-source framework for uncertainty-aware validation and reproducible analysis of RF measurements."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -13,7 +13,7 @@ authors = [
     { name = "rfmeasurement contributors" },
 ]
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3",

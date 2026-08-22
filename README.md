@@ -5,8 +5,10 @@
 An open-source Python framework for uncertainty-aware validation and
 reproducible analysis of RF measurements.
 
-> **Status: design stage.** The public API is not yet stable. See the
-> [roadmap](docs/roadmap.md) for current progress.
+> **Status: early alpha (`0.1.0`).** The public API is not yet stable and
+> may change without notice between `0.x` releases. See the
+> [roadmap](docs/roadmap.md) for current progress and the
+> [changelog](CHANGELOG.md) for release notes.
 
 **Documentation:** <https://rfmeasurement.readthedocs.io/en/latest/>
 
@@ -51,7 +53,13 @@ The full design and development specification lives in [docs/](docs/index.md):
 
 ## Installation
 
-The package is not yet released. For development:
+Not yet published to PyPI. Install from a tagged release or from source:
+
+```bash
+pip install "rfmeasurement @ git+https://github.com/telmomm/rfmeasurement.git@v0.1.0"
+```
+
+For development:
 
 ```bash
 git clone https://github.com/telmomm/rfmeasurement.git
