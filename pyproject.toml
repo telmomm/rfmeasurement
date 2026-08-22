@@ -43,7 +43,7 @@ docs = [
 
 [project.urls]
 Homepage = "https://github.com/telmomm/rfmeasurement"
-Documentation = "https://github.com/telmomm/rfmeasurement/tree/main/docs"
+Documentation = "https://rfmeasurement.readthedocs.io/en/latest/"
 Issues = "https://github.com/telmomm/rfmeasurement/issues"
 Changelog = "https://github.com/telmomm/rfmeasurement/blob/main/CHANGELOG.md"
 

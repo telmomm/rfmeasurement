@@ -1,10 +1,14 @@
 # rfmeasurement
 
+[![Documentation Status](https://readthedocs.org/projects/rfmeasurement/badge/?version=latest)](https://rfmeasurement.readthedocs.io/en/latest/?badge=latest)
+
 An open-source Python framework for uncertainty-aware validation and
 reproducible analysis of RF measurements.
 
 > **Status: design stage.** The public API is not yet stable. See the
 > [roadmap](docs/roadmap.md) for current progress.
+
+**Documentation:** <https://rfmeasurement.readthedocs.io/en/latest/>
 
 ## Statement of need
 
@@ -25,6 +29,9 @@ reporting. See [docs/scope.md](docs/scope.md) for the boundary between the
 two projects.
 
 ## Documentation
+
+The published documentation (installation, API reference, contributing,
+license) is at <https://rfmeasurement.readthedocs.io/en/latest/>.
 
 The full design and development specification lives in [docs/](docs/index.md):
 

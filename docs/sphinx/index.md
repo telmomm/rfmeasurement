@@ -23,4 +23,7 @@ on GitHub.
 
 installation
 api/index
+publications
+contributing
+license
 ```
