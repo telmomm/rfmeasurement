@@ -124,7 +124,7 @@ Do not submit until all of these are true:
 -   [ ] contribution process;
 -   [ ] OSI-approved license;
 -   [ ] citation metadata;
--   [ ] archived release with DOI;
+-   [x] archived release with DOI;
 -   [ ] JOSS paper draft;
 -   [ ] AI usage disclosure.
 

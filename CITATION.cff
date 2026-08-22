@@ -10,3 +10,7 @@ repository-code: "https://github.com/telmomm/rfmeasurement"
 license: BSD-3-Clause
 version: 0.1.0
 date-released: "2026-08-22"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22058515
+    description: "Concept DOI: always resolves to the latest archived version on Zenodo"

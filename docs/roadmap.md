@@ -115,7 +115,7 @@ from a clean environment.
 -   [ ] research usage;
 -   [ ] citations/adoption where available;
 -   [ ] paper draft;
--   [ ] Zenodo integration;
+-   [x] Zenodo integration;
 -   [ ] JOSS metadata;
 -   [ ] AI usage disclosure;
 -   [ ] final release.

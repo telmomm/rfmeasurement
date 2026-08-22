@@ -1,6 +1,8 @@
 # rfmeasurement
 
+[![PyPI](https://img.shields.io/pypi/v/rfmeasurement.svg)](https://pypi.org/project/rfmeasurement/)
 [![Documentation Status](https://readthedocs.org/projects/rfmeasurement/badge/?version=latest)](https://rfmeasurement.readthedocs.io/en/latest/?badge=latest)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22058515.svg)](https://doi.org/10.5281/zenodo.22058515)
 
 An open-source Python framework for uncertainty-aware validation and
 reproducible analysis of RF measurements.
@@ -53,10 +55,8 @@ The full design and development specification lives in [docs/](docs/index.md):
 
 ## Installation
 
-Not yet published to PyPI. Install from a tagged release or from source:
-
 ```bash
-pip install "rfmeasurement @ git+https://github.com/telmomm/rfmeasurement.git@v0.1.0"
+pip install rfmeasurement
 ```
 
 For development:
@@ -81,7 +81,9 @@ including scientific contributions.
 ## Citation
 
 If you use `rfmeasurement` in research, please cite it using the metadata
-in [CITATION.cff](CITATION.cff).
+in [CITATION.cff](CITATION.cff). Every release is archived on Zenodo:
+[10.5281/zenodo.22058515](https://doi.org/10.5281/zenodo.22058515) (this DOI
+always resolves to the latest version).
 
 ## License
 

@@ -73,9 +73,12 @@ prominently in release notes.
 The project provides machine-readable citation metadata in
 [`CITATION.cff`](../CITATION.cff) at the repository root.
 
--   Every tagged release should keep `CITATION.cff` in sync with the
-    released version and, once available, the Zenodo-issued DOI for that
-    release (see [JOSS strategy](joss-strategy.md)).
+-   Every tagged release should keep `CITATION.cff`'s `version` and
+    `date-released` fields in sync with the released version (GitHub is
+    connected to Zenodo, so each GitHub Release is archived automatically;
+    see [JOSS strategy](joss-strategy.md)). `CITATION.cff` references
+    Zenodo's concept DOI, which always resolves to the latest release, so
+    the DOI itself does not need to change between releases.
 -   Contributors whose work is substantial to the scientific software
     should be added to the author list in `CITATION.cff`, subject to the
     attribution process described in
