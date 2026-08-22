@@ -1,0 +1,27 @@
+name: Feature request
+description: Propose new functionality for rfmeasurement.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: What problem does this solve? Reference docs/scope.md if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: scope-check
+    attributes:
+      label: Scope
+      options:
+        - label: I have checked docs/scope.md and believe this is in scope for the core package.

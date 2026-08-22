@@ -1,6 +1,7 @@
 # Documentation package manifest
 
 - `README.md`
+- `api-specification.md`
 - `architecture.md`
 - `contributing.md`
 - `domain-model.md`

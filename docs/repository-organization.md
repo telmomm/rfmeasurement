@@ -29,6 +29,7 @@ rfmeasurement/
 │   ├── requirements.md
 │   ├── architecture.md
 │   ├── domain-model.md
+│   ├── api-specification.md
 │   ├── uncertainty.md
 │   ├── measurement-quality.md
 │   ├── reproducibility.md

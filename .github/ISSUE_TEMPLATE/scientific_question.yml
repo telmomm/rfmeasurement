@@ -1,0 +1,22 @@
+name: Scientific question or concern
+description: Question about a validation rule, uncertainty method, or scientific assumption.
+labels: ["scientific-review"]
+body:
+  - type: textarea
+    id: topic
+    attributes:
+      label: Method or module in question
+      description: Which validation rule, uncertainty model, or algorithm does this concern?
+    validations:
+      required: true
+  - type: textarea
+    id: concern
+    attributes:
+      label: Question or concern
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Standards, papers, or textbooks relevant to this question.

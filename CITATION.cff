@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "rfmeasurement: an open-source framework for uncertainty-aware validation and reproducible analysis of RF measurements"
+type: software
+authors:
+  - family-names: "Miguel-Medina"
+    given-names: "Telmo"
+    orcid: "https://orcid.org/0009-0004-0654-6650"
+repository-code: "https://github.com/telmomm/rfmeasurement"
+license: BSD-3-Clause
+version: 0.1.0.dev0
+date-released: "2026-08-22"

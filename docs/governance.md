@@ -67,3 +67,21 @@ Public APIs should follow a documented deprecation policy.
 
 Scientific changes that alter numerical results should be highlighted
 prominently in release notes.
+
+## Citation policy
+
+The project provides machine-readable citation metadata in
+[`CITATION.cff`](../CITATION.cff) at the repository root.
+
+-   Every tagged release should keep `CITATION.cff` in sync with the
+    released version and, once available, the Zenodo-issued DOI for that
+    release (see [JOSS strategy](joss-strategy.md)).
+-   Contributors whose work is substantial to the scientific software
+    should be added to the author list in `CITATION.cff`, subject to the
+    attribution process described in
+    [contributing.md](contributing.md#attribution).
+-   Publications, benchmarks, or datasets produced using
+    `rfmeasurement` should cite the specific version used, not just the
+    project in general, so that results remain reproducible.
+-   Once a JOSS paper exists, `CITATION.cff` should reference it as the
+    preferred citation.

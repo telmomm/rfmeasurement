@@ -7,17 +7,17 @@ than feature count.
 
 **Goal:** establish the scientific and software foundation.
 
--   [ ] Choose final project name.
--   [ ] Create public repository.
--   [ ] Select OSI-approved license.
--   [ ] Add README and documentation skeleton.
--   [ ] Add Code of Conduct.
--   [ ] Add CONTRIBUTING guide.
--   [ ] Add issue templates.
--   [ ] Add CI.
--   [ ] Define supported Python versions.
--   [ ] Create initial architecture decision records.
--   [ ] Establish citation policy.
+-   [x] Choose final project name.
+-   [x] Create public repository.
+-   [x] Select OSI-approved license.
+-   [x] Add README and documentation skeleton.
+-   [x] Add Code of Conduct.
+-   [x] Add CONTRIBUTING guide.
+-   [x] Add issue templates.
+-   [x] Add CI.
+-   [x] Define supported Python versions.
+-   [x] Create initial architecture decision records.
+-   [x] Establish citation policy.
 
 **Exit criterion:** a public repository with transparent design
 decisions and runnable development environment.

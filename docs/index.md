@@ -52,6 +52,8 @@ layer for:
   [Domain model](domain-model.md)             Core scientific concepts and
                                               objects
 
+  [API specification](api-specification.md)   Initial public API definition
+
   [Uncertainty](uncertainty.md)               Scientific design for uncertainty
                                               quantification
 
