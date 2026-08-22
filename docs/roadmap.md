@@ -43,13 +43,13 @@ measurement without instrument-specific assumptions.
 
 Initial rules:
 
--   [ ] data integrity;
--   [ ] frequency-grid checks;
--   [ ] finite-value checks;
--   [ ] passivity;
--   [ ] reciprocity;
--   [ ] basic continuity;
--   [ ] noise/dynamic-range indicators.
+-   [x] data integrity;
+-   [x] frequency-grid checks;
+-   [x] finite-value checks;
+-   [x] passivity;
+-   [x] reciprocity;
+-   [x] basic continuity;
+-   [x] noise/dynamic-range indicators.
 
 **Exit criterion:** a real measurement can generate a useful structured
 QA report.
