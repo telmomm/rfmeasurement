@@ -14,7 +14,7 @@ class DynamicRangeIndicatorRule(ValidationRule):
     """Flag S-parameter samples close to a configurable noise-floor threshold.
 
     This is an indicator, not a measured noise floor: it reports how close
-    the smallest observed |S| magnitude is to ``noise_floor_db``, which the
+    the smallest observed S-parameter magnitude is to ``noise_floor_db``, which the
     caller must set based on their instrument's actual noise floor. Per the
     "quality score" caution in docs/measurement-quality.md, this rule exposes
     the underlying minimum; it does not claim to know the true instrument

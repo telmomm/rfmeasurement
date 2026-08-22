@@ -39,7 +39,9 @@ rfmeasurement/
 │   ├── contributing.md
 │   ├── governance.md
 │   ├── joss-strategy.md
-│   └── research-plan.md
+│   ├── research-plan.md
+│   ├── adr/
+│   └── sphinx/            <- published user documentation (see below)
 │
 ├── examples/
 ├── benchmarks/
@@ -59,7 +61,8 @@ rfmeasurement/
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
-└── SECURITY.md
+├── SECURITY.md
+└── .readthedocs.yaml
 ```
 
 ## Packaging
@@ -106,10 +109,30 @@ Examples should be version-controlled and tested where practical.
 
 ## Documentation build
 
-A documentation system such as MkDocs or Sphinx may be introduced after
-the Markdown information architecture stabilises.
+The project maintains two separate bodies of documentation:
 
-The source of truth remains Markdown.
+-   `docs/*.md` and `docs/adr/` --- the project design and process
+    specification (vision, scope, requirements, roadmap, governance,
+    ADRs). This is maintainer/contributor-facing and is read directly on
+    GitHub; it is not built into a separate site.
+-   `docs/sphinx/` --- the published, user-facing documentation
+    (installation, API reference generated from docstrings via
+    `sphinx.ext.autodoc`, and eventually tutorials/examples). Built with
+    [Sphinx](https://www.sphinx-doc.org/) and
+    [MyST](https://myst-parser.readthedocs.io/) so that Markdown remains
+    the source format, and published on
+    [Read the Docs](https://readthedocs.org/) once the repository is
+    connected there, matching the approach used by `scikit-rf`.
+
+Build locally with:
+
+``` bash
+python -m pip install -e ".[docs]"
+sphinx-build -b html docs/sphinx docs/sphinx/_build/html
+```
+
+CI builds the Sphinx documentation with warnings treated as errors, so
+that broken cross-references or docstring issues are caught before merge.
 
 ## Releases
 

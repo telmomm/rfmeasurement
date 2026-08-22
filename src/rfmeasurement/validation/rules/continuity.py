@@ -11,7 +11,7 @@ from rfmeasurement.validation.base import ValidationRule
 
 
 class ContinuityRule(ValidationRule):
-    """Flag abrupt jumps in |S| magnitude between adjacent frequency points.
+    """Flag abrupt jumps in S-parameter magnitude between adjacent frequency points.
 
     This is a heuristic indicator (docs/measurement-quality.md Level 3), not
     a physical-consistency requirement: a real discontinuity in a DUT's

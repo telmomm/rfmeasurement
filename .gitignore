@@ -12,3 +12,5 @@ venv/
 .coverage
 htmlcov/
 .DS_Store
+docs/sphinx/_build/
+docs/sphinx/api/generated/
