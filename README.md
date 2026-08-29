@@ -3,6 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/rfmeasurement.svg)](https://pypi.org/project/rfmeasurement/)
 [![Documentation Status](https://readthedocs.org/projects/rfmeasurement/badge/?version=latest)](https://rfmeasurement.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22058515.svg)](https://doi.org/10.5281/zenodo.22058515)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=telmomm_rfmeasurement&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=telmomm_rfmeasurement)
 
 An open-source Python framework for uncertainty-aware validation and
 reproducible analysis of RF measurements.
