@@ -10,7 +10,9 @@ venv/
 .mypy_cache/
 .ruff_cache/
 .coverage
+coverage.xml
 htmlcov/
+.scannerwork/
 .DS_Store
 docs/sphinx/_build/
 docs/sphinx/api/generated/
