@@ -47,7 +47,7 @@ def propagate_monte_carlo(
     other distribution raises :class:`NotImplementedError` rather than
     silently ignoring it.
     """
-    rng = rng if rng is not None else np.random.default_rng()
+    rng = rng if rng is not None else np.random.default_rng(42)
     samples = _sample_all_sources(model.sources, rng, n_samples)
 
     outputs = np.empty(n_samples)
