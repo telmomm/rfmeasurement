@@ -22,6 +22,7 @@ on GitHub.
 :caption: Contents
 
 installation
+examples
 api/index
 publications
 contributing
