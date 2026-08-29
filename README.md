@@ -59,13 +59,8 @@ The full design and development specification lives in [docs/](docs/index.md):
 pip install rfmeasurement
 ```
 
-For development:
-
-```bash
-git clone https://github.com/telmomm/rfmeasurement.git
-cd rfmeasurement
-python -m pip install -e ".[dev]"
-```
+For development, see [CONTRIBUTING.md](CONTRIBUTING.md#getting-started) for
+setting up a virtual environment and installing with the `dev` extra.
 
 Supported Python versions: 3.10, 3.11, 3.12, 3.13.
 

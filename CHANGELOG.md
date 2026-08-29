@@ -8,6 +8,25 @@ once a stable API is released.
 
 ## [Unreleased]
 
+### Added
+
+- `tests/scientific/`: analytical GUM/NIST reference-case tests moved out of
+  `tests/unit/`, each citing the specific clause it verifies.
+- `tests/regression/` and `tests/data/`: pinned validation outcomes for a
+  real, lab-measured antenna (scikit-rf's "ring slot" data, frozen locally
+  so the test does not depend on `scikit-rf`'s internal package layout).
+- `tests/integration/`: the validate -> propagate -> budget ->
+  `AnalysisResult` pipeline shown in `examples/01`/`02`, formalized with
+  assertions instead of printed output.
+- `examples/03_real_measurement.py`: validates real measured data instead
+  of synthetic networks.
+- Virtual environment setup documented in `CONTRIBUTING.md`/`README.md`.
+
+### Fixed
+
+- Silenced an expected `InvalidFrequencyWarning` in the frequency-grid
+  validation test (the disordered grid is deliberate there).
+
 ## [0.1.0] - 2026-08-22
 
 First tagged release. The public API is not yet stable (pre-1.0 semantic

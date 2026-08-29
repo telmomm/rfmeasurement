@@ -8,12 +8,25 @@ mechanics.
 
 ## Getting started
 
+Use a virtual environment rather than installing into your system or base
+conda Python -- it keeps this project's dependencies isolated and avoids the
+wrong `python`/`pip` being picked up by your shell. It is never committed
+(already in `.gitignore`) and can be deleted and recreated at any time.
+
 ```bash
 git clone https://github.com/telmomm/rfmeasurement.git
 cd rfmeasurement
+
+python3 -m venv .venv
+source .venv/bin/activate    # Windows: .venv\Scripts\activate
+
 python -m pip install -e ".[dev]"
 pytest
 ```
+
+To also build the documentation locally, install with the `docs` extra too:
+`python -m pip install -e ".[dev,docs]"` (see
+[docs/repository-organization.md](docs/repository-organization.md#documentation-build)).
 
 ## Before opening a pull request
 
