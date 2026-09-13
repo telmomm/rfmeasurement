@@ -1,6 +1,8 @@
 # Publications using or citing rfmeasurement
 
-`rfmeasurement` is a young, design-stage project (see the
+This repository uses `rfmeasurement` as part of its calibration and analysis workflow.
+
+The `rfmeasurement` project itself is a young, design-stage project (see the
 [roadmap](https://github.com/telmomm/rfmeasurement/blob/main/docs/roadmap.md)),
 so there is nothing to list here yet. Generating this kind of evidence of
 research use is itself part of the project's plan toward a
