@@ -10,6 +10,14 @@ once a stable API is released.
 
 ### Added
 
+- `ProvenanceGraph` (`rfmeasurement.provenance`, Phase 4): links a
+  measurement's `ProvenanceRecord` history into an auditable, acyclic graph
+  (topological order, ancestors/descendants, external-source detection, JSON
+  export). `ProvenanceRecord` gained a `record_id` so records can reference
+  each other.
+- `examples/04_provenance_graph.py`: builds the provenance graph for the
+  attenuator result from `examples/01`/`02` and audits it back to its raw
+  input.
 - `tests/scientific/`: analytical GUM/NIST reference-case tests moved out of
   `tests/unit/`, each citing the specific clause it verifies.
 - `tests/regression/` and `tests/data/`: pinned validation outcomes for a

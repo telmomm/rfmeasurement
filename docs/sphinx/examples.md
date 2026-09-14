@@ -42,3 +42,15 @@ constructed demonstration.
 ```{literalinclude} ../../examples/03_real_measurement.py
 :language: python
 ```
+
+## 04 -- How was this number produced?
+
+Continues examples 01/02: attaches a `ProvenanceRecord` to each processing
+step (import, calibration, validation, both uncertainty-propagation
+methods, final report) and links them into a `ProvenanceGraph` to audit the
+reported result back to its raw input, per
+[docs/reproducibility.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/reproducibility.md).
+
+```{literalinclude} ../../examples/04_provenance_graph.py
+:language: python
+```

@@ -40,3 +40,16 @@ coverage intervals (see
    :undoc-members:
    :show-inheritance:
 ```
+
+## Provenance
+
+Links a measurement's `ProvenanceRecord` history into an auditable,
+acyclic graph (see
+[docs/reproducibility.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/reproducibility.md)).
+
+```{eval-rst}
+.. automodule:: rfmeasurement.provenance
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```

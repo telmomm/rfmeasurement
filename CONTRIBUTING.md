@@ -24,9 +24,23 @@ python -m pip install -e ".[dev]"
 pytest
 ```
 
-To also build the documentation locally, install with the `docs` extra too:
-`python -m pip install -e ".[dev,docs]"` (see
-[docs/repository-organization.md](docs/repository-organization.md#documentation-build)).
+To also build the documentation locally, install with the `docs` extra too
+and run `sphinx-build`:
+
+```bash
+python -m pip install -e ".[dev,docs]"
+sphinx-build -b html docs/sphinx docs/sphinx/_build/html
+```
+
+Open `docs/sphinx/_build/html/index.html` in a browser to check the result.
+Re-run `sphinx-build` after editing anything under `docs/sphinx/` (or a
+docstring, since the API reference is generated from them) -- it is not
+watched or rebuilt automatically. CI builds it with warnings treated as
+errors (`sphinx-build -b html -W ...`), so run it the same way before
+opening a pull request that touches documentation. See
+[docs/repository-organization.md](docs/repository-organization.md#documentation-build)
+for the split between `docs/*.md` (design/process docs, read directly on
+GitHub) and `docs/sphinx/` (the published, user-facing site).
 
 ## Before opening a pull request
 
