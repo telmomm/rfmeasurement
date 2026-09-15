@@ -109,20 +109,29 @@ Examples should be version-controlled and tested where practical.
 
 ## Documentation build
 
-The project maintains two separate bodies of documentation:
+The project maintains two bodies of documentation, kept in a single
+source of truth:
 
 -   `docs/*.md` and `docs/adr/` --- the project design and process
     specification (vision, scope, requirements, roadmap, governance,
-    ADRs). This is maintainer/contributor-facing and is read directly on
-    GitHub; it is not built into a separate site.
+    ADRs). This is written maintainer/contributor-first and is read
+    directly on GitHub.
 -   `docs/sphinx/` --- the published, user-facing documentation
     (installation, API reference generated from docstrings via
-    `sphinx.ext.autodoc`, and eventually tutorials/examples). Built with
-    [Sphinx](https://www.sphinx-doc.org/) and
+    `sphinx.ext.autodoc`, tutorials/examples, and a "Training" section).
+    Built with [Sphinx](https://www.sphinx-doc.org/) and
     [MyST](https://myst-parser.readthedocs.io/) so that Markdown remains
     the source format, and published on
     [Read the Docs](https://readthedocs.org/) once the repository is
     connected there, matching the approach used by `scikit-rf`.
+
+The "Training" section under `docs/sphinx/training/` republishes every
+`docs/*.md` and `docs/adr/*.md` document in full, so a reader on Read the
+Docs never has to leave the site to find the underlying design rationale.
+Each page there is a thin stub that uses MyST's `{include}` directive to
+pull in the corresponding file from `docs/`, rather than a copy -- so
+`docs/*.md` stays the only place that content is edited, and both
+surfaces render the same text.
 
 Build locally with:
 

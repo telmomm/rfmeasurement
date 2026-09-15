@@ -1,8 +1,11 @@
 """Sphinx configuration for the published rfmeasurement documentation.
 
-This project is self-contained under docs/sphinx/: it does not build the
-project-specification files in docs/*.md (see docs/index.md), which are
-maintainer/contributor-facing rather than end-user API documentation.
+Most pages live under docs/sphinx/. The "Training" section
+(docs/sphinx/training/) is a set of thin stub pages that each {include}
+the corresponding project-specification file from docs/*.md and
+docs/adr/, so those design/process documents are published in full on
+Read the Docs without duplicating their content -- docs/*.md remains the
+single source of truth, readable both directly on GitHub and here.
 """
 
 from __future__ import annotations
@@ -24,6 +27,7 @@ extensions = [
 ]
 
 myst_enable_extensions = ["colon_fence"]
+myst_heading_anchors = 3
 source_suffix = {".md": "markdown"}
 
 autodoc_typehints = "description"

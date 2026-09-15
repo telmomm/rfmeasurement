@@ -1,11 +1,9 @@
 # Publications using or citing rfmeasurement
 
 The `rfmeasurement` project itself is a young, design-stage project (see the
-[roadmap](https://github.com/telmomm/rfmeasurement/blob/main/docs/roadmap.md)).
-Generating this kind of evidence of research use is itself part of the
-project's plan toward a
-[JOSS submission](https://github.com/telmomm/rfmeasurement/blob/main/docs/joss-strategy.md)
-and its [research plan](https://github.com/telmomm/rfmeasurement/blob/main/docs/research-plan.md).
+{doc}`training/roadmap`). Generating this kind of evidence of research use
+is itself part of the project's plan toward a {doc}`training/joss-strategy`
+and its {doc}`training/research-plan`.
 
 ## Projects using rfmeasurement
 

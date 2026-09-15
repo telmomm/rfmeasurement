@@ -9,6 +9,11 @@ the project. It is intentionally written before the implementation so
 that the software architecture, scientific scope, validation strategy,
 and open-source practices remain explicit as the project evolves.
 
+Every document below is also published in full on
+[Read the Docs](https://rfmeasurement.readthedocs.io/en/latest/training/index.html),
+under "Training", for readers who prefer not to leave the published
+documentation site.
+
 ## Purpose
 
 The project aims to provide a Python framework for turning RF

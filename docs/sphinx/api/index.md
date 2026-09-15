@@ -1,13 +1,11 @@
 # API Reference
 
 Generated from docstrings via `sphinx.ext.autodoc`. The public API is not
-yet stable (see the project's
-[roadmap](https://github.com/telmomm/rfmeasurement/blob/main/docs/roadmap.md)).
+yet stable (see the project's {doc}`../training/roadmap`).
 
 ## Domain model
 
-Stable scientific concepts (see
-[docs/domain-model.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/domain-model.md)).
+Stable scientific concepts (see {doc}`../training/domain-model`).
 
 ```{eval-rst}
 .. automodule:: rfmeasurement.domain
@@ -19,7 +17,7 @@ Stable scientific concepts (see
 ## Validation
 
 Composable measurement-quality checks (see
-[docs/measurement-quality.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/measurement-quality.md)).
+{doc}`../training/measurement-quality`).
 
 ```{eval-rst}
 .. automodule:: rfmeasurement.validation
@@ -31,8 +29,7 @@ Composable measurement-quality checks (see
 ## Uncertainty
 
 Distributions, covariance, linear and Monte Carlo propagation, budgets, and
-coverage intervals (see
-[docs/uncertainty.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/uncertainty.md)).
+coverage intervals (see {doc}`../training/uncertainty`).
 
 ```{eval-rst}
 .. automodule:: rfmeasurement.uncertainty
@@ -44,8 +41,7 @@ coverage intervals (see
 ## Provenance
 
 Links a measurement's `ProvenanceRecord` history into an auditable,
-acyclic graph (see
-[docs/reproducibility.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/reproducibility.md)).
+acyclic graph (see {doc}`../training/reproducibility`).
 
 ```{eval-rst}
 .. automodule:: rfmeasurement.provenance

@@ -30,8 +30,9 @@ this project builds on.
 
 ## Consequences
 
-- Full license text lives in [LICENSE](../../LICENSE) at the repository
-  root, satisfying the JOSS "open source" requirement.
+- Full license text lives in
+  [LICENSE](https://github.com/telmomm/rfmeasurement/blob/main/LICENSE) at
+  the repository root, satisfying the JOSS "open source" requirement.
 - Consistent with `scikit-rf`'s license, simplifying any future
   redistribution questions.
 - No explicit patent grant (unlike Apache-2.0); considered acceptable

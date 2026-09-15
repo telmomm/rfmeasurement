@@ -10,7 +10,7 @@
 
 If you use `rfmeasurement` in research, please cite it using the metadata in
 [`CITATION.cff`](https://github.com/telmomm/rfmeasurement/blob/main/CITATION.cff).
-See the project's [citation policy](https://github.com/telmomm/rfmeasurement/blob/main/docs/governance.md#citation-policy)
+See the project's [citation policy](training/governance.md#citation-policy)
 for how this is kept up to date across releases.
 
 Every release is archived on [Zenodo](https://zenodo.org/):

@@ -13,9 +13,7 @@ assessment, uncertainty modelling and propagation, and reproducible
 reporting on top of it.
 
 For the full project vision, scope, requirements, roadmap, and architecture
-decision records, see the
-[project design documentation](https://github.com/telmomm/rfmeasurement/tree/main/docs)
-on GitHub.
+decision records, see {doc}`training/index`.
 
 ```{toctree}
 :maxdepth: 2
@@ -27,4 +25,11 @@ api/index
 publications
 contributing
 license
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Training
+
+training/index
 ```

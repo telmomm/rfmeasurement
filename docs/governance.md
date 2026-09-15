@@ -71,7 +71,8 @@ prominently in release notes.
 ## Citation policy
 
 The project provides machine-readable citation metadata in
-[`CITATION.cff`](../CITATION.cff) at the repository root.
+[`CITATION.cff`](https://github.com/telmomm/rfmeasurement/blob/main/CITATION.cff)
+at the repository root.
 
 -   Every tagged release should keep `CITATION.cff`'s `version` and
     `date-released` fields in sync with the released version (GitHub is

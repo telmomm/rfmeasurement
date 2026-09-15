@@ -4,7 +4,7 @@ Runnable scripts under
 [`examples/`](https://github.com/telmomm/rfmeasurement/tree/main/examples)
 in the repository. Each answers a specific question rather than merely
 demonstrating syntax (see
-[docs/repository-organization.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/repository-organization.md#examples)).
+[the project's repository organization](training/repository-organization.md#examples)).
 Run any of them locally with:
 
 ```bash
@@ -48,8 +48,7 @@ constructed demonstration.
 Continues examples 01/02: attaches a `ProvenanceRecord` to each processing
 step (import, calibration, validation, both uncertainty-propagation
 methods, final report) and links them into a `ProvenanceGraph` to audit the
-reported result back to its raw input, per
-[docs/reproducibility.md](https://github.com/telmomm/rfmeasurement/blob/main/docs/reproducibility.md).
+reported result back to its raw input, per {doc}`training/reproducibility`.
 
 ```{literalinclude} ../../examples/04_provenance_graph.py
 :language: python

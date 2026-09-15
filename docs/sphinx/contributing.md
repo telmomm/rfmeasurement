@@ -17,9 +17,8 @@ at the repository root.
 A pull request implementing a scientific method (a validation rule, an
 uncertainty model, a propagation algorithm) should additionally include
 references, the mathematical definition, assumptions and limitations, and a
-validation strategy. See
-[`docs/contributing.md`](https://github.com/telmomm/rfmeasurement/blob/main/docs/contributing.md)
-for the full philosophy behind this requirement.
+validation strategy. See {doc}`training/contributing` for the full
+philosophy behind this requirement.
 
 ## Reporting bugs and asking questions
 
@@ -30,10 +29,9 @@ for open-ended architectural or scientific-direction questions.
 
 ## Governance
 
-Decisions are recorded as
-[Architecture Decision Records](https://github.com/telmomm/rfmeasurement/tree/main/docs/adr),
-and the project's decision-making process is documented in
-[`docs/governance.md`](https://github.com/telmomm/rfmeasurement/blob/main/docs/governance.md).
+Decisions are recorded as {doc}`Architecture Decision Records
+<training/adr/index>`, and the project's decision-making process is
+documented in {doc}`training/governance`.
 
 ## Code of conduct
 

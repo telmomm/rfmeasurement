@@ -18,6 +18,15 @@ once a stable API is released.
 - `examples/04_provenance_graph.py`: builds the provenance graph for the
   attenuator result from `examples/01`/`02` and audits it back to its raw
   input.
+- Published documentation ("Training" section, `docs/sphinx/training/`):
+  republishes every `docs/*.md` design/process document and ADR on Read the
+  Docs via thin MyST `{include}` stub pages, so `docs/*.md` stays the only
+  place that content is edited while readers of the published site no
+  longer have to jump to GitHub for it. Sphinx pages that used to link out
+  to `docs/*.md` on GitHub now cross-reference these pages directly.
+- `nanovna-calibration` and `pydigger-data` listed on the publications page
+  as, respectively, the first real downstream user of `rfmeasurement` and
+  an automated PyPI index that has picked it up.
 - `tests/scientific/`: analytical GUM/NIST reference-case tests moved out of
   `tests/unit/`, each citing the specific clause it verifies.
 - `tests/regression/` and `tests/data/`: pinned validation outcomes for a
