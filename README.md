@@ -8,7 +8,7 @@
 An open-source Python framework for uncertainty-aware validation and
 reproducible analysis of RF measurements.
 
-> **Status: early alpha (`0.1.0`).** The public API is not yet stable and
+> **Status: early alpha (`0.2.0`).** The public API is not yet stable and
 > may change without notice between `0.x` releases. See the
 > [roadmap](docs/roadmap.md) for current progress and the
 > [changelog](CHANGELOG.md) for release notes.

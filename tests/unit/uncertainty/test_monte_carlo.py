@@ -29,6 +29,37 @@ def test_reproducible_with_explicit_seed():
     np.testing.assert_array_equal(result_a.samples, result_b.samples)
 
 
+def test_rng_state_is_captured_before_sampling():
+    sources = (source("x", nominal_value=1.0, standard_uncertainty=0.1),)
+    model = UncertaintyModel(
+        measurand=_MEASURAND,
+        function=lambda v: v["x"] ** 2,
+        sources=sources,
+        assumptions="n/a",
+    )
+    rng = np.random.default_rng(7)
+    expected_state = rng.bit_generator.state
+    result = propagate_monte_carlo(model, n_samples=100, rng=rng)
+    assert result.rng_state == expected_state
+
+
+def test_recorded_rng_state_reproduces_the_run():
+    sources = (source("x", nominal_value=1.0, standard_uncertainty=0.1),)
+    model = UncertaintyModel(
+        measurand=_MEASURAND,
+        function=lambda v: v["x"] ** 2,
+        sources=sources,
+        assumptions="n/a",
+    )
+    original = propagate_monte_carlo(model, n_samples=100, rng=np.random.default_rng(7))
+
+    replay_rng = np.random.default_rng(1)  # arbitrary seed, overwritten by the recorded state
+    replay_rng.bit_generator.state = original.rng_state
+    replayed = propagate_monte_carlo(model, n_samples=100, rng=replay_rng)
+
+    np.testing.assert_array_equal(original.samples, replayed.samples)
+
+
 def test_unsupported_distribution_raises():
     sources = (
         source(

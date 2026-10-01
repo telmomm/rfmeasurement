@@ -74,10 +74,10 @@ published metrology examples.
 **Goal:** make analysis auditable.
 
 -   [x] provenance graph;
--   [ ] machine-readable metadata;
--   [ ] reproducible configuration;
--   [ ] deterministic execution;
--   [ ] report generation.
+-   [x] machine-readable metadata;
+-   [x] reproducible configuration;
+-   [x] deterministic execution;
+-   [x] report generation.
 
 **Exit criterion:** an external user can reproduce a published example
 from a clean environment.

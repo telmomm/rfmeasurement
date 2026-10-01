@@ -49,3 +49,16 @@ acyclic graph (see {doc}`../training/reproducibility`).
    :undoc-members:
    :show-inheritance:
 ```
+
+## Reporting
+
+Machine-readable metadata, reproducible analysis configuration, software
+environment capture, reproducibility-level classification, and
+human-readable report generation (see {doc}`../training/reproducibility`).
+
+```{eval-rst}
+.. automodule:: rfmeasurement.reporting
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```

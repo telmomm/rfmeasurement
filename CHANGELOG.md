@@ -8,6 +8,13 @@ once a stable API is released.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-01
+
+Completes Phase 4 (reproducibility). The public API is still not stable
+(pre-1.0 semantic versioning): expect breaking changes in `0.x` releases.
+See [docs/roadmap.md](docs/roadmap.md) for what is and is not implemented
+yet.
+
 ### Added
 
 - `ProvenanceGraph` (`rfmeasurement.provenance`, Phase 4): links a
@@ -27,6 +34,29 @@ once a stable API is released.
 - `nanovna-calibration` and `pydigger-data` listed on the publications page
   as, respectively, the first real downstream user of `rfmeasurement` and
   an automated PyPI index that has picked it up.
+- `rfmeasurement.reporting` (Phase 4, completing it): machine-readable
+  metadata, reproducible configuration, deterministic execution, and report
+  generation.
+  - `capture_environment()`/`SoftwareEnvironment`: software/Python/key
+    dependency versions.
+  - `build_configuration()`/`AnalysisConfiguration`: the validation rules,
+    uncertainty model assumptions/sources, and propagation method actually
+    used for a result -- a propagation method is only recorded when a
+    `LinearPropagationResult` or `MonteCarloResult` is supplied as evidence,
+    never guessed from the presence of an `UncertaintyModel` alone.
+  - `build_metadata()`: assembles the above plus the provenance graph,
+    validation summary, and result into one JSON-serializable dict; input
+    data is referenced (name, ports, frequency range), never embedded.
+  - `reproducibility_level()`: classifies a result on the docs/reproducibility.md
+    1-4 scale from what was actually supplied, rather than assuming every
+    result is equally reproducible.
+  - `generate_report()`: renders the same metadata as a human-readable
+    Markdown report.
+  - `MonteCarloResult` (`rfmeasurement.uncertainty.monte_carlo`) gained
+    `rng_state`: the generator's state immediately before sampling, so a run
+    can be replayed exactly rather than only noting that a seed existed.
+- `examples/05_reproducible_report.py`: produces the full metadata package
+  and Markdown report for the attenuator result from `examples/01`/`02`/`04`.
 - `tests/scientific/`: analytical GUM/NIST reference-case tests moved out of
   `tests/unit/`, each citing the specific clause it verifies.
 - `tests/regression/` and `tests/data/`: pinned validation outcomes for a
@@ -78,5 +108,6 @@ reporting output beyond the in-memory domain objects.
   (`examples/01_validate_measurement.py`) and propagating uncertainty
   through a nonlinear dB conversion (`examples/02_propagate_uncertainty.py`).
 
-[Unreleased]: https://github.com/telmomm/rfmeasurement/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/telmomm/rfmeasurement/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/telmomm/rfmeasurement/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/telmomm/rfmeasurement/releases/tag/v0.1.0

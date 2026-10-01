@@ -53,3 +53,16 @@ reported result back to its raw input, per {doc}`training/reproducibility`.
 ```{literalinclude} ../../examples/04_provenance_graph.py
 :language: python
 ```
+
+## 05 -- Can an external user reproduce this result from a clean environment?
+
+Completes examples 01/02/04: assembles the full machine-readable metadata
+package and human-readable Markdown report for the attenuator result --
+software/Python versions, analysis configuration (validation rules,
+uncertainty model, propagation method and RNG state), input identifiers,
+validation summary, uncertainty summary, and an explicit 1-4
+reproducibility level, per {doc}`training/reproducibility`.
+
+```{literalinclude} ../../examples/05_reproducible_report.py
+:language: python
+```

@@ -23,6 +23,13 @@ class MonteCarloResult:
     standard deviation is itself uncertain, with precision that improves as
     ``1 / sqrt(n_samples)``. Increase ``n_samples`` if ``standard_error`` is
     not small relative to ``standard_uncertainty``.
+
+    ``rng_state`` is the JSON-serializable state of the random generator
+    exactly as it stood before sampling began (docs/reproducibility.md:
+    "the random generator should be explicit; the seed should be
+    recordable"). Recording it, rather than just a seed integer, lets a run
+    be reproduced even when the caller supplied an already-advanced
+    generator rather than a freshly-seeded one.
     """
 
     value: float
@@ -30,6 +37,7 @@ class MonteCarloResult:
     standard_error: float
     n_samples: int
     samples: np.ndarray
+    rng_state: dict[str, object]
 
 
 def propagate_monte_carlo(
@@ -48,6 +56,7 @@ def propagate_monte_carlo(
     silently ignoring it.
     """
     rng = rng if rng is not None else np.random.default_rng(42)
+    rng_state = dict(rng.bit_generator.state)
     samples = _sample_all_sources(model.sources, rng, n_samples)
 
     outputs = np.empty(n_samples)
@@ -65,6 +74,7 @@ def propagate_monte_carlo(
         standard_error=standard_error,
         n_samples=n_samples,
         samples=outputs,
+        rng_state=rng_state,
     )
 
 
