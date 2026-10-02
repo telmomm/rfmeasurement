@@ -18,6 +18,11 @@ class AnalysisResult:
     The uncertainty fields here are a snapshot (standard/expanded
     uncertainty and a coverage interval); the propagation machinery that
     produces them is introduced in a later phase (docs/uncertainty.md).
+    ``coverage_factor`` and ``effective_degrees_of_freedom`` record how
+    ``expanded_uncertainty`` was obtained from ``standard_uncertainty``, so
+    a Gaussian k = 1.96 interval can be told apart from a Student-t one;
+    ``effective_degrees_of_freedom`` of ``None`` means the Gaussian factor
+    was used.
     """
 
     measurand: Measurand
@@ -30,3 +35,5 @@ class AnalysisResult:
     coverage_probability: float | None = None
     coverage_interval: tuple[float, float] | None = None
     contributing_sources: tuple[UncertaintySource, ...] = field(default_factory=tuple)
+    coverage_factor: float | None = None
+    effective_degrees_of_freedom: float | None = None

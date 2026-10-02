@@ -16,6 +16,11 @@ class UncertaintySource:
     be modelled explicitly rather than assumed away (docs/uncertainty.md).
     ``correlation`` maps another source's ``name`` to a correlation
     coefficient in [-1, 1].
+
+    ``degrees_of_freedom`` records how well ``standard_uncertainty`` itself
+    is known (GUM G.3/G.4): ``n - 1`` for a Type A estimate from ``n``
+    repeated readings. ``None`` means it is treated as exactly known, the
+    usual convention for Type B sources.
     """
 
     name: str
@@ -28,3 +33,4 @@ class UncertaintySource:
     correlation: dict[str, float] = field(default_factory=dict)
     source_reference: str | None = None
     assumptions: str | None = None
+    degrees_of_freedom: float | None = None

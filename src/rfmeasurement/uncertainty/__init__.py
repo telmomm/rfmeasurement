@@ -8,6 +8,7 @@ from rfmeasurement.uncertainty.covariance import build_covariance_matrix
 from rfmeasurement.uncertainty.coverage import (
     coverage_factor,
     coverage_interval_from_samples,
+    effective_degrees_of_freedom,
     expand,
 )
 from rfmeasurement.uncertainty.distributions import (
@@ -26,6 +27,7 @@ __all__ = [
     "build_covariance_matrix",
     "coverage_factor",
     "coverage_interval_from_samples",
+    "effective_degrees_of_freedom",
     "expand",
     "propagate_linear",
     "propagate_monte_carlo",

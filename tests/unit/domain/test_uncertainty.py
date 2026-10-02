@@ -26,3 +26,15 @@ def test_uncertainty_source_can_declare_correlation_to_another_source():
         correlation={"s21_noise": 0.8},
     )
     assert source.correlation["s21_noise"] == 0.8
+
+
+def test_uncertainty_source_degrees_of_freedom_default_to_exactly_known():
+    source = UncertaintySource(
+        name="s11_noise",
+        description="Standard deviation of the mean of 5 sweeps",
+        uncertainty_type=UncertaintyType.TYPE_A,
+        distribution=Distribution.NORMAL,
+        standard_uncertainty=0.01,
+        unit="linear",
+    )
+    assert source.degrees_of_freedom is None

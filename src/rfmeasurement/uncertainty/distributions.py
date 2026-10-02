@@ -33,6 +33,12 @@ def standard_uncertainty_from_half_width(distribution: Distribution, half_width:
     )
 
 
+def finite_degrees_of_freedom(source: UncertaintySource) -> float | None:
+    """``source.degrees_of_freedom``, or ``None`` if its standard uncertainty is exactly known."""
+    nu = source.degrees_of_freedom
+    return None if nu is None or math.isinf(nu) else nu
+
+
 def sample_source(
     source: UncertaintySource, rng: np.random.Generator, n_samples: int
 ) -> np.ndarray:
@@ -42,6 +48,12 @@ def sample_source(
     :func:`rfmeasurement.uncertainty.monte_carlo.propagate_monte_carlo`, which
     handles correlated NORMAL sources jointly before falling back to this
     function for everything else.
+
+    A NORMAL source with finite ``degrees_of_freedom`` is drawn from a
+    scaled and shifted t-distribution, ``nominal + u * t_nu`` (JCGM 101,
+    6.4.9.2), because its standard uncertainty is itself an estimate. Other
+    distributions have no such treatment, so finite degrees of freedom on
+    them raise :class:`NotImplementedError`.
     """
     if source.nominal_value is None:
         raise MissingNominalValueError(
@@ -50,6 +62,15 @@ def sample_source(
     nominal = source.nominal_value
     u = source.standard_uncertainty
 
+    nu = finite_degrees_of_freedom(source)
+    if nu is not None:
+        if source.distribution is not Distribution.NORMAL:
+            raise NotImplementedError(
+                "Monte Carlo sampling with finite degrees of freedom is only implemented for "
+                f"normally distributed sources; source '{source.name}' is "
+                f"{source.distribution.value}."
+            )
+        return np.asarray(nominal + u * rng.standard_t(nu, size=n_samples))
     if source.distribution is Distribution.NORMAL:
         return np.asarray(rng.normal(nominal, u, size=n_samples))
     if source.distribution is Distribution.UNIFORM:

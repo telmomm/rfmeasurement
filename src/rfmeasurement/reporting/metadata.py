@@ -135,6 +135,8 @@ def _result_to_dict(result: AnalysisResult) -> dict[str, Any]:
         "standard_uncertainty": result.standard_uncertainty,
         "expanded_uncertainty": result.expanded_uncertainty,
         "coverage_probability": result.coverage_probability,
+        "coverage_factor": result.coverage_factor,
+        "effective_degrees_of_freedom": result.effective_degrees_of_freedom,
         "coverage_interval": list(result.coverage_interval) if result.coverage_interval else None,
         "contributing_sources": [source.name for source in result.contributing_sources],
     }

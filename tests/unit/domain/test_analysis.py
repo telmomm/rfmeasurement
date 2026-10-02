@@ -12,6 +12,8 @@ def test_analysis_result_defaults_to_not_evaluated():
     assert result.validation_status is ValidationStatus.NOT_EVALUATED
     assert result.standard_uncertainty is None
     assert result.contributing_sources == ()
+    assert result.coverage_factor is None
+    assert result.effective_degrees_of_freedom is None
 
 
 def test_analysis_result_can_carry_a_coverage_interval():

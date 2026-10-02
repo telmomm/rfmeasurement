@@ -2,7 +2,8 @@
 implementation (linear/GUM propagation).
 
 Reference: JCGM 101:2008 (GUM Supplement 1), the Monte Carlo method for
-uncertainty propagation.
+uncertainty propagation (6.4.9.2 for Type A sources with finite degrees of
+freedom).
 """
 
 from __future__ import annotations
@@ -15,6 +16,7 @@ from _sources import source
 
 from rfmeasurement.domain.measurand import Measurand
 from rfmeasurement.domain.uncertainty_model import UncertaintyModel
+from rfmeasurement.uncertainty.coverage import coverage_interval_from_samples, expand
 from rfmeasurement.uncertainty.linear import propagate_linear
 from rfmeasurement.uncertainty.monte_carlo import propagate_monte_carlo
 
@@ -72,3 +74,23 @@ def test_nonlinear_model_agrees_with_linear_propagation_for_small_uncertainty():
     assert mc_result.standard_uncertainty == pytest.approx(
         linear_result.standard_uncertainty, rel=0.05
     )
+
+
+def test_finite_degrees_of_freedom_source_is_sampled_from_scaled_t_distribution():
+    """JCGM 101 6.4.9.2: X = x + u * t_nu, so the 95 % interval is x +/- t_0.975(nu) * u
+    (the GUM G.3 interval) and the standard deviation is u * sqrt(nu / (nu - 2))."""
+    nominal, u, nu = 1.0, 0.1, 4
+    model = UncertaintyModel(
+        measurand=_MEASURAND,
+        function=lambda v: v["x"],
+        sources=(
+            source("x", nominal_value=nominal, standard_uncertainty=u, degrees_of_freedom=nu),
+        ),
+        assumptions="y = x, x the mean of 5 repeated readings.",
+    )
+    mc_result = propagate_monte_carlo(model, n_samples=200_000, rng=np.random.default_rng(3))
+    lower, upper = coverage_interval_from_samples(mc_result.samples, 0.95)
+    _, (expected_lower, expected_upper) = expand(nominal, u, 0.95, degrees_of_freedom=nu)
+    assert lower == pytest.approx(expected_lower, abs=0.005)
+    assert upper == pytest.approx(expected_upper, abs=0.005)
+    assert mc_result.standard_uncertainty == pytest.approx(u * math.sqrt(nu / (nu - 2)), rel=0.03)

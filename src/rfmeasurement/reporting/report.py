@@ -64,8 +64,16 @@ def _result_section(metadata: dict[str, Any]) -> str:
     if result["standard_uncertainty"] is not None:
         lines.append(f"- standard uncertainty: {result['standard_uncertainty']:g} {result['unit']}")
     if result["expanded_uncertainty"] is not None:
-        coverage = result["coverage_probability"]
-        coverage_text = f" ({coverage:.0%} coverage)" if coverage is not None else ""
+        coverage_details = []
+        if result["coverage_probability"] is not None:
+            coverage_details.append(f"{result['coverage_probability']:.0%} coverage")
+        if result["coverage_factor"] is not None:
+            coverage_details.append(f"k = {result['coverage_factor']:.3g}")
+        if result["effective_degrees_of_freedom"] is not None:
+            coverage_details.append(
+                f"effective degrees of freedom = {result['effective_degrees_of_freedom']:.1f}"
+            )
+        coverage_text = f" ({', '.join(coverage_details)})" if coverage_details else ""
         lines.append(
             f"- expanded uncertainty: {result['expanded_uncertainty']:g} "
             f"{result['unit']}{coverage_text}"

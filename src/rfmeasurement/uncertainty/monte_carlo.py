@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import warnings
 from dataclasses import dataclass
 
 import numpy as np
@@ -11,7 +12,11 @@ from rfmeasurement.domain.enums import Distribution
 from rfmeasurement.domain.uncertainty import UncertaintySource
 from rfmeasurement.domain.uncertainty_model import UncertaintyModel
 from rfmeasurement.uncertainty.covariance import build_covariance_matrix
-from rfmeasurement.uncertainty.distributions import MissingNominalValueError, sample_source
+from rfmeasurement.uncertainty.distributions import (
+    MissingNominalValueError,
+    finite_degrees_of_freedom,
+    sample_source,
+)
 
 
 @dataclass(slots=True)
@@ -30,6 +35,14 @@ class MonteCarloResult:
     recordable"). Recording it, rather than just a seed integer, lets a run
     be reproduced even when the caller supplied an already-advanced
     generator rather than a freshly-seeded one.
+
+    When a source declares finite ``degrees_of_freedom`` it is sampled from
+    a t-distribution, whose standard deviation is ``sqrt(nu / (nu - 2))``
+    times its ``standard_uncertainty``. ``standard_uncertainty`` here is
+    therefore larger than the one linear propagation reports for the same
+    model (JCGM 101 vs. the GUM), and does not converge at all for
+    ``nu <= 2`` (:func:`propagate_monte_carlo` warns); the coverage interval
+    read off ``samples`` is valid in either case.
     """
 
     value: float
@@ -54,7 +67,24 @@ def propagate_monte_carlo(
     (sampled jointly via a multivariate normal); a correlation involving any
     other distribution raises :class:`NotImplementedError` rather than
     silently ignoring it.
+
+    A NORMAL source with finite ``degrees_of_freedom`` is sampled from a
+    scaled and shifted t-distribution (JCGM 101, 6.4.9.2), so that
+    :func:`~rfmeasurement.uncertainty.coverage.coverage_interval_from_samples`
+    accounts for its standard uncertainty being an estimate. Such a source
+    must be uncorrelated.
     """
+    for source in model.sources:
+        nu = finite_degrees_of_freedom(source)
+        if nu is not None and nu <= 2:
+            warnings.warn(
+                f"UncertaintySource '{source.name}' has degrees_of_freedom <= 2: its "
+                "t-distribution has no finite variance, so the Monte Carlo standard_uncertainty "
+                "does not converge. Use the coverage interval of the samples instead.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+
     rng = rng if rng is not None else np.random.default_rng(42)
     rng_state = dict(rng.bit_generator.state)
     samples = _sample_all_sources(model.sources, rng, n_samples)
@@ -84,7 +114,7 @@ def _sample_all_sources(
     _validate_correlation_support(sources)
 
     samples: dict[str, np.ndarray] = {}
-    normal_sources = [s for s in sources if s.distribution is Distribution.NORMAL]
+    normal_sources = [s for s in sources if _is_jointly_normal(s)]
     if normal_sources:
         means = []
         for source in normal_sources:
@@ -102,14 +132,18 @@ def _sample_all_sources(
             samples[source.name] = draws[:, i]
 
     for source in sources:
-        if source.distribution is not Distribution.NORMAL:
+        if not _is_jointly_normal(source):
             samples[source.name] = sample_source(source, rng, n_samples)
 
     return samples
 
 
+def _is_jointly_normal(source: UncertaintySource) -> bool:
+    return source.distribution is Distribution.NORMAL and finite_degrees_of_freedom(source) is None
+
+
 def _validate_correlation_support(sources: tuple[UncertaintySource, ...]) -> None:
-    normal_names = {s.name for s in sources if s.distribution is Distribution.NORMAL}
+    normal_names = {s.name for s in sources if _is_jointly_normal(s)}
     for source in sources:
         for other_name, correlation in source.correlation.items():
             if correlation == 0:
@@ -117,6 +151,7 @@ def _validate_correlation_support(sources: tuple[UncertaintySource, ...]) -> Non
             if source.name not in normal_names or other_name not in normal_names:
                 raise NotImplementedError(
                     "Correlated Monte Carlo sampling is only implemented between normally "
-                    f"distributed sources; got a nonzero correlation between '{source.name}' "
-                    f"({source.distribution.value}) and '{other_name}'."
+                    "distributed sources without finite degrees of freedom; got a nonzero "
+                    f"correlation between '{source.name}' ({source.distribution.value}) and "
+                    f"'{other_name}'."
                 )

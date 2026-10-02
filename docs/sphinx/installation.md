@@ -17,6 +17,7 @@ cd rfmeasurement
 python -m pip install -e ".[dev]"
 ```
 
-The core package depends on [numpy](https://numpy.org/) and
+The core package depends on [numpy](https://numpy.org/),
+[scipy](https://scipy.org/) (already required by scikit-rf) and
 [scikit-rf](https://scikit-rf.readthedocs.io/), which is used for all RF
 network mathematics (see the project's {doc}`training/scope`).
