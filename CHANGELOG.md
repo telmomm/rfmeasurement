@@ -8,6 +8,15 @@ once a stable API is released.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-02
+
+Adds degrees of freedom to the uncertainty engine. Backward compatible:
+results are unchanged for sources that do not declare
+`degrees_of_freedom`. For sources that do, expanded uncertainties and
+coverage intervals become wider than in 0.2.0, which is the intended
+correction. The public API is still not stable (pre-1.0 semantic
+versioning).
+
 ### Added
 
 - Degrees of freedom for uncertainty sources, so coverage intervals stay
@@ -141,6 +150,7 @@ reporting output beyond the in-memory domain objects.
   (`examples/01_validate_measurement.py`) and propagating uncertainty
   through a nonlinear dB conversion (`examples/02_propagate_uncertainty.py`).
 
-[Unreleased]: https://github.com/telmomm/rfmeasurement/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/telmomm/rfmeasurement/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/telmomm/rfmeasurement/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/telmomm/rfmeasurement/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/telmomm/rfmeasurement/releases/tag/v0.1.0
