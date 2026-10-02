@@ -14,3 +14,4 @@ so.
 | [0002](0002-src-layout-and-module-boundaries.md) | Use a `src/` layout with domain-first module boundaries | accepted |
 | [0003](0003-bsd-3-clause-license.md) | License the project under BSD-3-Clause | accepted |
 | [0004](0004-supported-python-versions.md) | Support Python 3.10-3.13 | accepted |
+| [0005](0005-scipy-as-direct-dependency.md) | Depend on SciPy directly for Student-t quantiles | accepted |

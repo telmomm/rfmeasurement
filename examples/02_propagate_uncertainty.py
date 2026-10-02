@@ -33,6 +33,7 @@ from rfmeasurement.domain import (
 from rfmeasurement.domain.uncertainty_model import UncertaintyModel
 from rfmeasurement.uncertainty import (
     build_budget,
+    coverage_factor,
     coverage_interval_from_samples,
     expand,
     propagate_linear,
@@ -43,6 +44,7 @@ from rfmeasurement.uncertainty import (
 SEED = 42  # fixed for reproducibility, per docs/reproducibility.md
 NOMINAL_MAGNITUDE = 0.316  # |S21| of the ~10 dB attenuator from example 01
 COVERAGE_PROBABILITY = 0.95
+N_SWEEPS = 10  # repeated sweeps behind the Type A noise estimate
 
 
 def _insertion_loss_db(values: dict) -> float:
@@ -52,6 +54,8 @@ def _insertion_loss_db(values: dict) -> float:
 
 
 def _build_model() -> UncertaintyModel:
+    # A Type A estimate from N_SWEEPS repeated sweeps is itself uncertain: recording
+    # its degrees of freedom lets the coverage factor account for that (GUM Annex G).
     vna_noise = UncertaintySource(
         name="vna_noise",
         description="Receiver noise / trace repeatability, estimated from repeated sweeps",
@@ -60,6 +64,7 @@ def _build_model() -> UncertaintyModel:
         standard_uncertainty=0.002,
         unit="linear magnitude",
         nominal_value=0.0,
+        degrees_of_freedom=N_SWEEPS - 1,
     )
 
     # A calibration-kit datasheet gives a +/- tolerance, not a standard deviation
@@ -130,13 +135,20 @@ def main() -> None:
             f"[{contribution.source.uncertainty_type.value}]"
         )
 
+    # The dominant source (calibration) is Type B, so the effective degrees of freedom
+    # are large and k stays close to the Gaussian 1.96; with vna_noise alone it would be 2.26.
+    k = coverage_factor(COVERAGE_PROBABILITY, linear.effective_degrees_of_freedom)
     expanded, gaussian_interval = expand(
-        linear.value, linear.standard_uncertainty, COVERAGE_PROBABILITY
+        linear.value,
+        linear.standard_uncertainty,
+        COVERAGE_PROBABILITY,
+        linear.effective_degrees_of_freedom,
     )
     mc_interval = coverage_interval_from_samples(monte_carlo.samples, COVERAGE_PROBABILITY)
     print(f"\n{COVERAGE_PROBABILITY:.0%} coverage interval")
     print("--------------------------")
-    print(f"Gaussian (linear)   : [{gaussian_interval[0]:.4f}, {gaussian_interval[1]:.4f}] dB")
+    print(f"effective degrees of freedom = {linear.effective_degrees_of_freedom:.0f}, k = {k:.3f}")
+    print(f"Linear (k * u_c)    : [{gaussian_interval[0]:.4f}, {gaussian_interval[1]:.4f}] dB")
     print(f"Empirical (Monte Carlo): [{mc_interval[0]:.4f}, {mc_interval[1]:.4f}] dB")
 
     result = AnalysisResult(
@@ -148,9 +160,11 @@ def main() -> None:
         coverage_probability=COVERAGE_PROBABILITY,
         coverage_interval=gaussian_interval,
         contributing_sources=tuple(model.sources),
+        coverage_factor=k,
+        effective_degrees_of_freedom=linear.effective_degrees_of_freedom,
     )
     print(f"\nReported result: {result.value:.3f} dB +/- {result.expanded_uncertainty:.3f} dB "
-          f"(k=95% coverage)")
+          f"(k = {result.coverage_factor:.2f}, {COVERAGE_PROBABILITY:.0%} coverage)")
 
 
 if __name__ == "__main__":

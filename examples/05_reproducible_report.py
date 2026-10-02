@@ -35,7 +35,12 @@ from rfmeasurement.domain import (
 )
 from rfmeasurement.domain.uncertainty_model import UncertaintyModel
 from rfmeasurement.reporting import build_metadata, generate_report
-from rfmeasurement.uncertainty import expand, propagate_linear, propagate_monte_carlo
+from rfmeasurement.uncertainty import (
+    coverage_factor,
+    expand,
+    propagate_linear,
+    propagate_monte_carlo,
+)
 from rfmeasurement.validation import validate
 
 SEED = 42
@@ -87,6 +92,7 @@ def _build_model() -> UncertaintyModel:
         standard_uncertainty=0.002,
         unit="linear magnitude",
         nominal_value=0.0,
+        degrees_of_freedom=9,  # estimated from 10 repeated sweeps
     )
     calibration = UncertaintySource(
         name="calibration",
@@ -120,7 +126,10 @@ def main() -> None:
     linear = propagate_linear(model)
     monte_carlo = propagate_monte_carlo(model, n_samples=100_000, rng=np.random.default_rng(SEED))
     expanded, coverage_interval = expand(
-        linear.value, linear.standard_uncertainty, COVERAGE_PROBABILITY
+        linear.value,
+        linear.standard_uncertainty,
+        COVERAGE_PROBABILITY,
+        linear.effective_degrees_of_freedom,
     )
 
     if measurement.validation.has_failures:
@@ -140,6 +149,8 @@ def main() -> None:
         coverage_probability=COVERAGE_PROBABILITY,
         coverage_interval=coverage_interval,
         contributing_sources=model.sources,
+        coverage_factor=coverage_factor(COVERAGE_PROBABILITY, linear.effective_degrees_of_freedom),
+        effective_degrees_of_freedom=linear.effective_degrees_of_freedom,
     )
 
     report = generate_report(

@@ -94,3 +94,33 @@ def test_correlation_between_non_normal_sources_raises():
     )
     with pytest.raises(NotImplementedError):
         propagate_monte_carlo(model, n_samples=10)
+
+
+def test_correlated_source_with_finite_degrees_of_freedom_raises():
+    sources = (
+        source(
+            "x1",
+            nominal_value=0.0,
+            standard_uncertainty=1.0,
+            degrees_of_freedom=4,
+            correlation={"x2": 0.5},
+        ),
+        source("x2", nominal_value=0.0, standard_uncertainty=1.0),
+    )
+    model = UncertaintyModel(
+        measurand=_MEASURAND,
+        function=lambda v: v["x1"] + v["x2"],
+        sources=sources,
+        assumptions="n/a",
+    )
+    with pytest.raises(NotImplementedError, match="degrees of freedom"):
+        propagate_monte_carlo(model, n_samples=10)
+
+
+def test_degrees_of_freedom_without_finite_variance_warns():
+    sources = (source("x", nominal_value=0.0, standard_uncertainty=1.0, degrees_of_freedom=2),)
+    model = UncertaintyModel(
+        measurand=_MEASURAND, function=lambda v: v["x"], sources=sources, assumptions="n/a"
+    )
+    with pytest.warns(RuntimeWarning, match="does not converge"):
+        propagate_monte_carlo(model, n_samples=10)

@@ -8,7 +8,7 @@ from importlib.metadata import PackageNotFoundError, version
 
 import rfmeasurement
 
-_TRACKED_DEPENDENCIES = ("numpy", "scikit-rf")
+_TRACKED_DEPENDENCIES = ("numpy", "scikit-rf", "scipy")
 
 
 @dataclass(slots=True, frozen=True)

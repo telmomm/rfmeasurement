@@ -8,6 +8,39 @@ once a stable API is released.
 
 ## [Unreleased]
 
+### Added
+
+- Degrees of freedom for uncertainty sources, so coverage intervals stay
+  valid when a Type A standard uncertainty comes from few repeated
+  readings (#8). Previously the Gaussian factor was always used, and a
+  nominal 95 % interval from five readings covered the true value about
+  88 % of the time.
+  - `UncertaintySource.degrees_of_freedom` (default `None`: exactly known,
+    the previous behaviour).
+  - `LinearPropagationResult.effective_degrees_of_freedom` and
+    `effective_degrees_of_freedom()`: the Welch-Satterthwaite formula (GUM
+    G.4). A finite-degrees-of-freedom source that is correlated with
+    another raises `NotImplementedError`.
+  - `coverage_factor()` and `expand()` accept `degrees_of_freedom` and
+    return the Student-t factor (GUM G.3).
+  - `propagate_monte_carlo()` samples a `NORMAL` source with finite degrees
+    of freedom from a scaled and shifted t-distribution (JCGM 101,
+    6.4.9.2), and warns when `degrees_of_freedom <= 2` because the output
+    standard uncertainty then does not converge.
+  - `AnalysisResult.coverage_factor` and
+    `AnalysisResult.effective_degrees_of_freedom`, included in
+    `build_metadata()` and `generate_report()`.
+  - `tests/scientific/`: GUM Table G.2 factors, the GUM H.1 worked example,
+    and the empirical coverage of the expanded interval for 3, 5 and 10
+    readings.
+
+### Changed
+
+- SciPy is now a direct dependency (`scipy>=1.10`), used for the Student-t
+  quantile. It was already installed as a dependency of scikit-rf; see
+  [ADR 0005](docs/adr/0005-scipy-as-direct-dependency.md). Its version is
+  recorded in `capture_environment()`.
+
 ## [0.2.0] - 2026-10-01
 
 Completes Phase 4 (reproducibility). The public API is still not stable

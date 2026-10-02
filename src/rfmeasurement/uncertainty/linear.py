@@ -11,6 +11,7 @@ import numpy as np
 from rfmeasurement.domain.uncertainty import UncertaintySource
 from rfmeasurement.domain.uncertainty_model import UncertaintyModel
 from rfmeasurement.uncertainty.covariance import build_covariance_matrix
+from rfmeasurement.uncertainty.coverage import effective_degrees_of_freedom
 from rfmeasurement.uncertainty.distributions import MissingNominalValueError
 
 
@@ -23,11 +24,17 @@ class LinearPropagationResult:
     squares. ``sensitivity_coefficients`` are the partial derivatives used,
     whether supplied analytically via ``UncertaintyModel.sensitivity`` or
     estimated by central finite differences.
+
+    ``effective_degrees_of_freedom`` is the Welch-Satterthwaite value (GUM
+    G.4) to pass to :func:`~rfmeasurement.uncertainty.coverage.expand`;
+    ``None`` means no source declared finite degrees of freedom, so the
+    Gaussian coverage factor applies.
     """
 
     value: float
     standard_uncertainty: float
     sensitivity_coefficients: dict[str, float]
+    effective_degrees_of_freedom: float | None = None
 
 
 def propagate_linear(
@@ -38,6 +45,11 @@ def propagate_linear(
     Useful for approximately linear models, fast estimates, and sensitivity
     analysis (docs/uncertainty.md). For strongly nonlinear models, prefer
     :func:`rfmeasurement.uncertainty.monte_carlo.propagate_monte_carlo`.
+
+    Raises :class:`NotImplementedError` if a source with finite
+    ``degrees_of_freedom`` is correlated with another source, since the
+    effective degrees of freedom are then not given by the
+    Welch-Satterthwaite formula.
     """
     nominal = _nominal_values(model.sources)
     value = model.function(nominal)
@@ -57,10 +69,14 @@ def propagate_linear(
             "Combined variance is negative: the declared correlations do not form a valid "
             "(positive semi-definite) covariance matrix."
         )
+    standard_uncertainty = math.sqrt(variance)
     return LinearPropagationResult(
         value=value,
-        standard_uncertainty=math.sqrt(variance),
+        standard_uncertainty=standard_uncertainty,
         sensitivity_coefficients=sensitivities,
+        effective_degrees_of_freedom=effective_degrees_of_freedom(
+            model.sources, sensitivities, standard_uncertainty
+        ),
     )
 
 

@@ -65,3 +65,26 @@ def test_sampling_unsupported_distribution_raises():
     )
     with pytest.raises(NotImplementedError):
         sample_source(s, np.random.default_rng(0), 10)
+
+
+def test_finite_degrees_of_freedom_on_non_normal_source_raises():
+    s = source(
+        "x",
+        nominal_value=0.0,
+        standard_uncertainty=1.0,
+        distribution=Distribution.UNIFORM,
+        degrees_of_freedom=4,
+    )
+    with pytest.raises(NotImplementedError, match="degrees of freedom"):
+        sample_source(s, np.random.default_rng(0), 10)
+
+
+def test_infinite_degrees_of_freedom_samples_like_an_exactly_known_source():
+    exact = source("x", nominal_value=10.0, standard_uncertainty=2.0)
+    infinite = source(
+        "x", nominal_value=10.0, standard_uncertainty=2.0, degrees_of_freedom=math.inf
+    )
+    np.testing.assert_array_equal(
+        sample_source(exact, np.random.default_rng(0), 100),
+        sample_source(infinite, np.random.default_rng(0), 100),
+    )

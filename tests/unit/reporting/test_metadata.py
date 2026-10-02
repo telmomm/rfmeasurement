@@ -48,3 +48,16 @@ def test_build_metadata_reports_a_level():
     metadata = build_metadata(measurement, result, model=model)
 
     assert metadata["reproducibility_level"] == 4
+
+
+def test_build_metadata_records_coverage_factor_and_degrees_of_freedom():
+    measurement = attenuator_measurement()
+    model = uncertainty_model()
+    result = analysis_result(model)
+    result.coverage_factor = 2.78
+    result.effective_degrees_of_freedom = 4.0
+
+    metadata = build_metadata(measurement, result, model=model)
+
+    assert metadata["result"]["coverage_factor"] == 2.78
+    assert metadata["result"]["effective_degrees_of_freedom"] == 4.0

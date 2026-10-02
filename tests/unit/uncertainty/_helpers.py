@@ -13,6 +13,7 @@ def source(
     standard_uncertainty: float,
     distribution: Distribution = Distribution.NORMAL,
     correlation: dict[str, float] | None = None,
+    degrees_of_freedom: float | None = None,
 ) -> UncertaintySource:
     return UncertaintySource(
         name=name,
@@ -23,4 +24,5 @@ def source(
         unit="linear",
         nominal_value=nominal_value,
         correlation=correlation or {},
+        degrees_of_freedom=degrees_of_freedom,
     )
